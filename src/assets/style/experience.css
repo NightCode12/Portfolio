@@ -1,0 +1,146 @@
+.experience {
+  min-height: 100vh;
+  display: flex;
+  padding: 0 clamp(20px, 6vw, 80px);
+  overflow: hidden;
+  justify-content: center;
+}
+
+.experience__inner {
+  max-width: var(--max-w);
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.experience__heading {
+  max-width: 520px;
+}
+
+.experience__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.experience__title {
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.experience__subtitle {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Filter tabs ── */
+.experience__filters {
+  display: flex;
+  gap: 8px;
+}
+
+.experience__filter {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.experience__filter:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+.experience__filter.is-active {
+  background: var(--accent);
+  color: #0a0a0b;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Cards grid ── */
+.experience__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.experience__card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+
+.experience__card:hover {
+  border-color: var(--border-hover);
+}
+
+.experience__range {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.experience__card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.experience__company {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.experience__details {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .experience {
+    min-height: auto;
+    padding: 60px 16px;
+  }
+
+  .experience__inner {
+    margin-top: 0;
+  }
+
+  .experience__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .experience__filters {
+    flex-wrap: wrap;
+  }
+
+  .experience__filter {
+    padding: 7px 16px;
+    font-size: 0.8rem;
+  }
+
+  .experience__list {
+    grid-template-columns: 1fr;
+  }
+}
