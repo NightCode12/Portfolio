@@ -68,7 +68,7 @@ const projects = [
     date: "Mar 2026",
     desc: "Centralized warehouse platform connecting 7 retail stores, enabling real-time order management, inventory tracking, and streamlined fulfillment across all locations.",
     stack: ["React", "Dashboard", "Inventory"],
-    link: "",
+    link: "https://abest-swag-wms.vercel.app/",
     images: [wms1, wms2, wms3, wms4],
   },
   {
