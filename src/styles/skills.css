@@ -1,0 +1,168 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+/* ── Group label ───────────────────────────────────────────── */
+.stack__label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+
+.stack__name {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.stack__blurb {
+  font-size: var(--fs-sm);
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.stack__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+.stack__count {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+/* ── Tiles ─────────────────────────────────────────────────── */
+.stack__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+  gap: var(--sp-2);
+}
+
+/* Icon sits beside the text rather than above it, so a tile is one
+   compact row instead of a tall card. */
+.skill {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: var(--sp-3);
+  padding: var(--sp-3);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition:
+    border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+/* Soft glow that fades in from the left on hover */
+.skill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(120px 70px at 12% 0%, var(--accent-soft), transparent 70%);
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.skill:hover {
+  border-color: var(--accent-line);
+  background: var(--surface-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.skill:hover::before {
+  opacity: 1;
+}
+
+/* ── Icon ──────────────────────────────────────────────────── */
+/* Neutral chip so each brand's own colours read true. */
+.skill__icon {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: var(--tint);
+  border: 1px solid var(--border);
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-spring);
+}
+
+.skill:hover .skill__icon {
+  background: var(--tint-strong);
+  border-color: var(--border-strong);
+  transform: scale(1.08) rotate(-5deg);
+}
+
+.skill__icon img {
+  width: 21px;
+  height: 21px;
+  object-fit: contain;
+}
+
+/* ── Text ──────────────────────────────────────────────────── */
+.skill__name {
+  grid-column: 2;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+.skill__level {
+  grid-column: 2;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .stack {
+    gap: var(--sp-4);
+  }
+
+  .stack__blurb {
+    display: none;
+  }
+
+  .stack__grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .skill {
+    column-gap: var(--sp-2);
+    padding: var(--sp-2);
+  }
+
+  .skill__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .skill__icon img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .skill__level {
+    font-size: 0.76rem;
+  }
+}

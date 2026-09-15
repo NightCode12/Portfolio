@@ -1,16 +1,70 @@
-# React + Vite
+# Portfolio — Falcatan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio built with React 19 + Vite. Dark, minimal, motion-driven.
 
-Currently, two official plugins are available:
+## Run it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production bundle in dist/
+npm run preview  # serve the built bundle
+npm run lint
+```
 
-## React Compiler
+## Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+src/
+  data/        Content only — edit these to change what the site says
+  components/  One file per section + shared Section / SectionHeading primitives
+  styles/      tokens.css → base.css → motion.css, then one file per section
+  hooks/       useReveal, useActiveSection, useScrolled, useBodyLock
+```
 
-## Expanding the ESLint configuration
+The split is deliberate: **content lives in `data/`, never in JSX.** To add a
+project, append an entry to `src/data/projects.js`; to retitle a nav link, edit
+`src/data/site.js`. No component changes needed.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Styling
+
+Three layers, imported once in `src/styles/index.css`:
+
+| File | Holds |
+| --- | --- |
+| `tokens.css` | Every color, size, radius, duration and easing as a CSS variable |
+| `base.css` | Reset plus shared primitives: `.section`, `.container`, `.heading`, `.card`, `.tag`, `.btn`, `.icon-btn`, `.field` |
+| `motion.css` | The animation vocabulary (see below) |
+
+Section stylesheets only carry what is unique to that section. Changing
+`--accent` in `tokens.css` restyles the whole site.
+
+## Motion
+
+Add `data-reveal` to any element and it fades in when scrolled into view —
+`useReveal()` in `App.jsx` watches the document (including nodes React mounts
+later) so nothing has to register itself.
+
+```jsx
+<div data-reveal="up" style={{ "--d": "120ms" }}>…</div>
+```
+
+Variants: `up`, `fade`, `scale`, `left`, `right`. `--d` staggers a group.
+For above-the-fold content that should not wait for a scroll, use the
+`.animate-rise` class instead.
+
+Everything degrades to no motion under `prefers-reduced-motion: reduce`.
+
+## Contact form
+
+Uses [EmailJS](https://www.emailjs.com/). Credentials are read from Vite env
+vars with the current values as fallbacks — copy `.env.example` to `.env` to
+override:
+
+```
+VITE_EMAILJS_SERVICE_ID=
+VITE_EMAILJS_TEMPLATE_ID=
+VITE_EMAILJS_PUBLIC_KEY=
+```
+
+These are publishable client-side identifiers, not secrets.

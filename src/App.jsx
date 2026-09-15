@@ -1,34 +1,15 @@
-import { useEffect } from 'react'
-import './App.css'
-import Header from './component/header'
-import Hero from './component/hero'
-import About from './component/about'
-import Skills from './component/skills'
-import Project from './component/project'
-import Experience from './component/experience'
-import Contact from './component/contact'
-import Footer from './component/footer'
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Experience from "./components/Experience";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import { useReveal } from "./hooks/useReveal";
 
 function App() {
-  useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    sections.forEach((section) => section.classList.add("reveal"));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal--visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+  useReveal();
 
   return (
     <>
@@ -37,13 +18,13 @@ function App() {
         <Hero />
         <About />
         <Skills />
-        <Project />
+        <Projects />
         <Experience />
         <Contact />
       </main>
       <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

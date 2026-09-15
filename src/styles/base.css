@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Reset + shared primitives. Everything reused by two or more sections
+   lives here so component files stay small.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* Ambient glow behind the page — one element, no repaint cost. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 78% -10%, rgba(45, 212, 191, 0.1), transparent 60%),
+    radial-gradient(48rem 34rem at 6% 22%, rgba(15, 118, 110, 0.06), transparent 62%),
+    radial-gradient(52rem 38rem at 50% 108%, rgba(15, 118, 110, 0.05), transparent 64%);
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Thin, unobtrusive scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-pill);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--tint-strong);
+}
+
+/* ── Section shell ─────────────────────────────────────────
+   Every section flows naturally. No 100vh traps, no clipping. */
+.section {
+  padding: var(--section-y) var(--gutter);
+  scroll-margin-top: var(--header-h);
+}
+
+.section--tight {
+  padding-block: clamp(56px, 8vh, 88px);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+/* ── Section heading ───────────────────────────────────────── */
+.heading {
+  max-width: 620px;
+  margin-bottom: var(--sp-7);
+}
+
+.heading--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.heading__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--sp-3);
+}
+
+.heading__eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.heading--center .heading__eyebrow::before {
+  display: none;
+}
+
+.heading__title {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.heading__subtitle {
+  margin-top: var(--sp-3);
+  color: var(--text-muted);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+}
+
+/* ── Card ──────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition:
+    border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.card--interactive {
+  cursor: pointer;
+}
+
+.card--interactive:hover,
+.card--interactive:focus-visible {
+  background: var(--surface-hover);
+  border-color: var(--accent-line);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow), 0 0 0 1px var(--accent-soft);
+}
+
+/* ── Tag / pill ────────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 0.71rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  white-space: nowrap;
+}
+
+.tag--muted {
+  color: var(--text-muted);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 12px 26px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform var(--dur) var(--ease-spring),
+    box-shadow var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 8px 28px var(--accent-glow);
+}
+
+.btn--primary:hover:not(:disabled) {
+  box-shadow: 0 14px 40px var(--accent-glow);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  border-color: var(--accent-line);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Arrow that nudges on hover */
+.btn__arrow {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.btn:hover:not(:disabled) .btn__arrow {
+  transform: translateX(3px);
+}
+
+.btn--down:hover:not(:disabled) .btn__arrow {
+  transform: translateY(3px);
+}
+
+/* ── Icon button ───────────────────────────────────────────── */
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-spring);
+}
+
+.icon-btn:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+  transform: scale(1.08);
+}
