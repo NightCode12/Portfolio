@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Design tokens — the single source of truth for the whole site.
+   Change a value here and every component follows.
+   ========================================================================== */
+
+:root {
+  /* ── Surfaces ───────────────────────────────────────────── */
+  /* Light, but deliberately not white: a soft sage paper so the page
+     never glares. Cards sit a shade lighter than the page behind them,
+     and every overlay is tinted deep green rather than plain black. */
+  --bg: #dbe2de;
+  --bg-soft: #e7ece9;
+  /* Panels lift off the dimmer ground instead of sinking into it. */
+  --surface: rgba(255, 255, 255, 0.46);
+  --surface-hover: rgba(255, 255, 255, 0.72);
+  --border: rgba(8, 44, 38, 0.13);
+  --border-strong: rgba(8, 44, 38, 0.24);
+
+  /* Overlay tints reused by chips, scrims and carousel dots. */
+  --tint: rgba(8, 44, 38, 0.05);
+  --tint-strong: rgba(8, 44, 38, 0.1);
+  --scrim: rgba(219, 226, 222, 0.78);
+  --overlay: rgba(10, 26, 22, 0.55);
+
+  /* ── Text ───────────────────────────────────────────────── */
+  --text: #101c19;
+  --text-muted: #4d5b56;
+  --text-faint: #6d7b76;
+
+  /* ── Accent ─────────────────────────────────────────────── */
+  /* Deep teal — the same green family, darkened until it reads
+     cleanly as text on a light ground. */
+  --accent: #0f766e;
+  --accent-deep: #0a534e;
+  --accent-ink: #f2fbf8;
+  --accent-soft: rgba(15, 118, 110, 0.09);
+  --accent-line: rgba(15, 118, 110, 0.26);
+  --accent-glow: rgba(15, 118, 110, 0.2);
+
+  /* ── Status ─────────────────────────────────────────────── */
+  /* Coral sits opposite the green on the wheel — reads as an error
+     without clashing. */
+  --danger: #c0403e;
+
+  /* ── Type scale ─────────────────────────────────────────── */
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --fs-eyebrow: 0.72rem;
+  --fs-sm: 0.82rem;
+  --fs-base: 0.92rem;
+  --fs-lead: 1.02rem;
+  --fs-h3: 1.05rem;
+  --fs-h2: clamp(1.75rem, 1.15rem + 2vw, 2.6rem);
+  --fs-h1: clamp(2.1rem, 1.3rem + 3.4vw, 3.4rem);
+
+  /* ── Spacing ────────────────────────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* ── Shape ──────────────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ── Layout ─────────────────────────────────────────────── */
+  --container: 1120px;
+  --header-h: 68px;
+  --gutter: clamp(20px, 5vw, 56px);
+  --section-y: clamp(80px, 11vh, 132px);
+
+  /* ── Elevation ──────────────────────────────────────────── */
+  --shadow-sm: 0 2px 10px rgba(8, 44, 38, 0.07);
+  --shadow: 0 12px 34px rgba(8, 44, 38, 0.1);
+  --shadow-lg: 0 30px 70px rgba(8, 44, 38, 0.16);
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 680ms;
+}

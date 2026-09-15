@@ -1,0 +1,72 @@
+/* With no form alongside it, the section reads as one centred column. */
+.contact__panel {
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.contact__panel .heading {
+  margin-bottom: var(--sp-6);
+}
+
+/* ── Details cards ─────────────────────────────────────────── */
+.contact__details {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+}
+
+.contact__detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-5) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition:
+    border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out);
+}
+
+.contact__detail:hover {
+  border-color: var(--accent-line);
+  background: var(--surface-hover);
+  transform: translateY(-3px);
+}
+
+.contact__detail-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.contact__detail-value {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  transition: color var(--dur) var(--ease-out);
+}
+
+a.contact__detail-value:hover {
+  color: var(--accent);
+}
+
+/* ── Call to action ────────────────────────────────────────── */
+.contact__cta {
+  margin-top: var(--sp-5);
+}
+
+@media (max-width: 560px) {
+  .contact__details {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__cta {
+    width: 100%;
+  }
+}
